@@ -1,0 +1,36 @@
+{
+  "project": "gma500-reverse-engineering",
+  "current_phase": 0,
+  "phases": [
+    {
+      "id": 0,
+      "name": "emgd_drv_analysis",
+      "display": "Xorg driver analysis (emgd_drv.so)",
+      "input_file": "analysis/emgd_drv/emgd_drv.so",
+      "prompt": "Analizá este binario ELF función por función. Empezá por los símbolos exportados. Para cada función identificá: offset, nombre inferido, qué hace, qué registros o estructuras toca. Usá confidence tags en cada hallazgo."
+    },
+    {
+      "id": 1,
+      "name": "emgd_ko_analysis",
+      "display": "Kernel module analysis (emgd.ko)",
+      "input_file": "analysis/emgd_ko/emgd.ko",
+      "prompt": "Analizá este módulo del kernel Linux. Identificá las funciones DRM/KMS, los callbacks que implementa, y los registros MMIO que toca. Correlacioná con los hallazgos de la fase anterior donde sea posible."
+    },
+    {
+      "id": 2,
+      "name": "correlation",
+      "display": "Cross-analysis correlation",
+      "input_file": "analysis/",
+      "prompt": "Usando los hallazgos documentados en logs/session-active.md, correlacioná las funciones del driver Xorg con las del módulo del kernel. Identificá el flujo completo desde una llamada Xorg hasta el acceso al hardware."
+    },
+    {
+      "id": 3,
+      "name": "mmio_tracing",
+      "display": "MMIO trace analysis",
+      "input_file": null,
+      "prompt": null,
+      "manual": true,
+      "note": "Requiere captura manual de trazas MMIO desde Windows con el driver original corriendo en Windows 7."
+    }
+  ]
+}
